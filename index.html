@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>デイリーチェックリスト</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <style>
+    #table-container, #progress-container {
+      display: none; /* 初期状態では非表示 */
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <!-- タイトル -->
+    <h3 class="center-align">デイリーチェックリスト</h3>
+
+    <!-- 日付表示 -->
+    <div id="today-date" class="center-align"></div>
+
+    <!-- メールアドレス入力フォーム -->
+    <div id="email-form-container" class="center-align">
+      <h5>メールアドレスを入力してください</h5>
+      <div class="input-field">
+        <input id="emailInput" type="email" placeholder="example@gmail.com" required>
+      </div>
+      <button class="btn waves-effect waves-light" onclick="submitEmail()">送信</button>
+    </div>
+
+    <!-- タスク一覧 -->
+    <div id="table-container">
+      <div class="progress">
+        <div class="indeterminate"></div>
+      </div>
+    </div>
+
+    <!-- 進捗状況 -->
+    <div id="progress-container" class="center-align">
+      <h5>今日の進捗</h5>
+      <div class="progress">
+        <div id="progress-bar" class="determinate" style="width: 0%"></div>
+      </div>
+      <p id="progress-text">完了: 0/0 タスク (0%)</p>
+    </div>
+  </div>
+
+  <!-- メモ編集モーダル -->
+  <div id="noteModal" class="modal">
+    <div class="modal-content">
+      <h4>メモを編集</h4>
+      <div class="input-field">
+        <textarea id="noteText" class="materialize-textarea"></textarea>
+        <label for="noteText">メモ</label>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <a href="#!" class="modal-close waves-effect waves-green btn-flat">キャンセル</a>
+      <a href="#!" class="waves-effect waves-green btn" onclick="saveNote()">保存</a>
+    </div>
+  </div>
+
+  <!-- Materialize JS -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+  <!-- Custom JS -->
+  <script src="script.js"></script>
+</body>
+</html>

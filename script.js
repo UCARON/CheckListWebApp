@@ -1,5 +1,7 @@
 // Initialize global variable
 let currentEditingRow = null;
+const GAS_BASE_URL = 
+"https://script.google.com/macros/s/AKfycbySnLTNYChFM71PIu4GjMsEqXmz_3x4dRtEAEv8Re6lqtUhVFmBLnJX3z5wwjTEtZNU/exec";
 
 // Initialize Materialize and load data on DOMContentLoaded
 document.addEventListener('DOMContentLoaded', () => {
@@ -22,24 +24,21 @@ function updateTodayDate() {
 }
 
 // Load task data from Google Script
-function loadData() {
-  console.log("Loading data from Google Script...");
-
-  google.script.run
-    .withSuccessHandler((data) => {
-      console.log("デバッグ: 取得したデータ", JSON.stringify(data, null, 2));
-      if (!data || data.length === 0) {
-        console.warn("デバッグ: 取得したデータが空です");
-      } else {
-        console.log("デバッグ: データの全体", data);
-        renderTable(data);
+async function loadData() {
+    try {
+      const response = await fetch(`${GAS_BASE_URL}?action=getTodaysTasks`);
+      if (!response.ok) {
+        throw new Error(`HTTPエラー: ${response.status}`);
       }
-    })
-    .withFailureHandler((error) => {
+      const data = await response.json();
+      console.log("デバッグ: 取得したデータ", data);
+      renderTable(data);
+    } catch (error) {
       console.error("デバッグ: エラー内容", error);
-    })
-    .getTodaysTasks();
-}
+      M.toast({ html: `エラーが発生しました: ${error.message}`, classes: 'red' });
+    }
+  }
+  
 
 // Render the task table
 function renderTable(data) {

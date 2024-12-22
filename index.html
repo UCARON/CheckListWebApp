@@ -1,15 +1,12 @@
 <!DOCTYPE html>
-<html>
+<html lang="ja">
 <head>
   <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>デイリーチェックリスト</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+  <link rel="stylesheet" href="styles.css">
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-  <style>
-    #table-container, #progress-container {
-      display: none; /* 初期状態では非表示 */
-    }
-  </style>
 </head>
 <body>
   <div class="container">
@@ -29,11 +26,7 @@
     </div>
 
     <!-- タスク一覧 -->
-    <div id="table-container">
-      <div class="progress">
-        <div class="indeterminate"></div>
-      </div>
-    </div>
+    <div id="table-container"></div>
 
     <!-- 進捗状況 -->
     <div id="progress-container" class="center-align">

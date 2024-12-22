@@ -1,1 +1,46 @@
-
+.container {
+    margin-top: 2rem;
+  }
+  
+  table {
+    margin-top: 2rem;
+  }
+  
+  .completed {
+    background-color: #e8f5e9 !important;
+  }
+  
+  .btn-small {
+    margin: 2px;
+  }
+  
+  th {
+    font-weight: bold;
+  }
+  
+  .progress {
+    margin: 2rem 0;
+  }
+  
+  .note-content {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  
+  .edit-note {
+    transform: scale(0.7);
+  }
+  
+  #progress-container {
+    margin: 2rem 0;
+  }
+  
+  #today-date {
+    margin: 1rem 0;
+  }
+  
+  #table-container, #progress-container {
+    display: none; /* 初期状態では非表示 */
+  }
+  

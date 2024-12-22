@@ -1,7 +1,7 @@
 // Initialize global variable
 let currentEditingRow = null;
 const GAS_BASE_URL = 
-"https://script.google.com/macros/s/AKfycbz8hD1Gimwz2iUN5iFDk8XoXwm4oTEvUEzX33aKw9UQjKwWnGA-SPYcHOU-J4Xa5p-J/exec";
+"https://script.google.com/macros/s/AKfycbyrGLaUepucB8LPES4Jha1IQ67wMeccm3abmgc8_uGrAs0D05UDLk1Jhe0l3B_RIeyG/exec";
 
 // Initialize Materialize and load data on DOMContentLoaded
 document.addEventListener('DOMContentLoaded', () => {
@@ -153,23 +153,38 @@ function saveNote() {
 }
 
 // Submit email to retrieve task checklist
-function submitEmail() {
-  const email = document.getElementById("emailInput").value;
-  if (!email) {
-    M.toast({ html: "メールアドレスを入力してください", classes: "red" });
-    return;
-  }
-
-  google.script.run
-    .withSuccessHandler((data) => {
+async function submitEmail() {
+    const email = document.getElementById("emailInput").value;
+    if (!email) {
+      M.toast({ html: "メールアドレスを入力してください", classes: "red" });
+      return;
+    }
+  
+    try {
+      // Google Apps Script Web アプリへのリクエスト
+      const response = await fetch(`${GAS_BASE_URL}?action=getTasksByEmail&email=${encodeURIComponent(email)}`);
+      if (!response.ok) {
+        throw new Error(`HTTPエラー: ${response.status}`);
+      }
+  
+      // レスポンスを解析
+      const data = await response.json();
+      console.log("デバッグ: 取得したデータ", data);
+  
+      if (data.error) {
+        throw new Error(data.error);
+      }
+  
+      // UI を更新
       document.getElementById("email-form-container").style.display = "none";
       document.getElementById("table-container").style.display = "block";
       document.getElementById("progress-container").style.display = "block";
       renderTable(data);
-    })
-    .withFailureHandler((error) => {
+    } catch (error) {
+      console.error("デバッグ: エラー内容", error);
       M.toast({ html: `エラーが発生しました: ${error.message}`, classes: "red" });
-    })
-    .getTasksByEmail(email);
-}
+    }
+  }
+  
+  
 

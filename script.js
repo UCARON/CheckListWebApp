@@ -1,7 +1,7 @@
 // Initialize global variable
 let currentEditingRow = null;
 const GAS_BASE_URL = 
-"https://script.google.com/macros/s/AKfycbySnLTNYChFM71PIu4GjMsEqXmz_3x4dRtEAEv8Re6lqtUhVFmBLnJX3z5wwjTEtZNU/exec";
+"https://script.google.com/macros/s/AKfycbyIDfQSQqQMbgT_WGINvlxzkUjidflnyHA2gz6J4ukaCHXXnjAWXKQLj7vInrvaVMKb/exec";
 
 // Initialize Materialize and load data on DOMContentLoaded
 document.addEventListener('DOMContentLoaded', () => {

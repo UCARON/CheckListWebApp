@@ -30,14 +30,22 @@ async function loadData() {
       if (!response.ok) {
         throw new Error(`HTTPエラー: ${response.status}`);
       }
-      const data = await response.json();
-      console.log("デバッグ: 取得したデータ", data);
+  
+      // レスポンス全体をテキスト形式でログに出力
+      const rawData = await response.text();
+      console.log("デバッグ: レスポンスの生データ", rawData);
+  
+      // JSONとしてパース
+      const data = JSON.parse(rawData);
+      console.log("デバッグ: JSONとして解析したデータ", data);
+  
       renderTable(data);
     } catch (error) {
       console.error("デバッグ: エラー内容", error);
       M.toast({ html: `エラーが発生しました: ${error.message}`, classes: 'red' });
     }
   }
+  
   
 
 // Render the task table
